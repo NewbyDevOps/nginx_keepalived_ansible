@@ -1,0 +1,9 @@
+---
+# tasks file for ha_nginx_keepalived
+
+- include_tasks: default_settings.yml
+- include_tasks: nginx_install.yml
+- include_tasks: keepalived_install.yml
+- include_tasks: configure_firewalld.yml
+- include_tasks: configure_nginx.yml
+- include_tasks: configure_keepalived.yml

@@ -1,0 +1,8 @@
+---
+# defaults vars for install
+ha_nginx_ver: 1.20.1-10.el7.x86_64
+ha_keepalived_ver: 1.3.5-19.el7.x86_64
+
+# defaults vars for keepalived
+
+ha_keepalived_state: "{{ (inventory_hostname in groups['primary']) | ternary('MASTER', 'BACKUP') }}"

@@ -1,0 +1,8 @@
+---
+
+- name: Install keepalived
+  yum:
+    name: "keepalived-{{ keepalived_ver }}"
+    update_cache: yes
+  notify:
+    - Start and enable keepalived service

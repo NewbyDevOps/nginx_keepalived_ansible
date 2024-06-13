@@ -1,0 +1,36 @@
+---
+
+# Configuring firewalld for nginx
+
+- name: Enable http service
+  firewalld:
+    service: http
+    zone: public
+    permanent: true
+    state: enabled
+    immediate: yes
+
+- name: Enable https service
+  firewalld:
+    service: https
+    zone: public
+    permanent: true
+    state: enabled
+    immediate: yes
+
+# Configuring firewalld for keepalived
+
+- name: Enabled VRRP protocol
+  firewalld:
+    rich_rule: 'rule protocol value="vrrp" accept'
+    permanent: true
+    state: enabled
+    immediate: yes
+
+- name: Enable traffic to the broadcast address 224.0.0.18
+  firewalld:
+    zone: public
+    rich_rule: 'rule family="ipv4" destination address="224.0.0.18" protocol value="ip" accept'
+    permanent: true
+    state: enabled
+    immediate: yes

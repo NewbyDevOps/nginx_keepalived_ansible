@@ -1,0 +1,7 @@
+---
+
+- name: update repo
+  yum:
+    name: "*"
+    state: latest
+    update_cache: true

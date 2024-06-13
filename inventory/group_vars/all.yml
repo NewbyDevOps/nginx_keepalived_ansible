@@ -1,0 +1,10 @@
+---
+
+# vars for install
+
+nginx_ver: "{{ ha_nginx_ver  }}"
+keepalived_ver: "{{ ha_keepalived_ver }}"
+
+# var for config keepalived
+
+keepalived_state: "{{ ha_keepalived_state }}"

@@ -1,0 +1,7 @@
+---
+
+- name: Installation and configuration nginx and keepalived
+  hosts: all
+
+  roles:
+    - ha_nginx_keepalived
