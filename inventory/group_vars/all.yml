@@ -2,9 +2,22 @@
 
 # vars for install
 
-nginx_ver: "{{ ha_nginx_ver  }}"
-keepalived_ver: "{{ ha_keepalived_ver }}"
+nginx_ver: "{{ nginx_deploy_ver  }}"
+keepalived_ver: "{{ keepalived_deploy_ver }}"
 
 # var for config keepalived
 
-keepalived_state: "{{ ha_keepalived_state }}"
+keepalived_script: "{{ keepalived_deploy_script }}"
+keepalived_interval: "{{ keepalived_deploy_interval }}"
+keepalived_weight: "{{ keepalived_deploy_weight }}"
+
+keepalived_state: "{{ keepalived_deploy_state }}"
+keepalived_interface: "{{ keepalived_deploy_interface }}"
+keepalived_router_id: "{{ keepalived_deploy_router_id }}"
+keepalived_priority: "{{ keepalived_deploy_priority }}"
+
+keepalived_vip: "{{ keepalived_deploy_vip }}"
+
+keepalived_track_script: "{{ keepalived_deploy_track_script }}"
+
+keepalived_auth_pass: "{{ keepalived_deploy_auth_pass }}"

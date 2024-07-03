@@ -1,0 +1,48 @@
+---
+# Tasks file for keepalived_deploy
+
+- name: Install keepalived
+  become: yes
+  yum:
+    name: "keepalived-{{ keepalived_ver }}"
+    update_cache: yes
+  notify:
+    - Start and enable keepalived service
+    
+# Configuring keepalived
+
+- name: Config the linux kernel for virtual addressing
+  become: yes
+  copy:
+    dest: /etc/sysctl.d/keepalived.conf
+    content: |
+      net.ipv4.ip_nonlocal_bind=1
+  notify:
+    - Apply settings for sysctl
+
+# Configuring firewalld for keepalived
+
+- name: Enable VRRP protocol
+  become: yes
+  firewalld:
+    rich_rule: 'rule protocol value="vrrp" accept'
+    permanent: true
+    state: enabled
+    immediate: yes
+
+- name: Enable traffic to the broadcast address 224.0.0.18
+  become: yes
+  firewalld:
+    zone: public
+    rich_rule: 'rule family="ipv4" destination address="224.0.0.18" protocol value="ip" accept'
+    permanent: true
+    state: enabled
+    immediate: yes
+
+- name: Copy keepalived.conf to servers
+  become: yes
+  template:
+    src: keepalived.j2
+    dest: /etc/keepalived/keepalived.conf
+  notify:
+    - Reload keepalived service

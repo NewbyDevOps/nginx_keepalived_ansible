@@ -1,0 +1,29 @@
+---
+# defaults file for keepalived_deploy
+
+keepalived_deploy_ver: 1.3.5-19.el7.x86_64
+
+# defaults vars for keepalived
+
+keepalived_deploy_script: '"pidof nginx"'
+keepalived_deploy_interval: 2     
+keepalived_deploy_weight: 2
+
+# keepalived_deploy_state: "{{ (inventory_hostname in groups['primary']) | ternary('MASTER', 'BACKUP') }}"
+keepalived_deploy_state: "{{ (ansible_host.split('.')[-1] == '250') | ternary('MASTER', 'BACKUP') }}"
+keepalived_deploy_interface: "enp0s8"
+keepalived_deploy_router_id: 151
+keepalived_deploy_priority: "{{ ansible_host.split('.')[-1] | int }}"
+
+keepalived_deploy_vip: 192.168.10.50/24
+
+keepalived_deploy_track_script: "check_nginx"
+
+keepalived_deploy_auth_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          64366162626635383137323535333535626132353965376362306437346663376331646465653762
+          6136363666323131643431643262383032313833356636650a363837376639366435346639636435
+          61306238323036313166386664373364366364336238326163343130613533333638663065353634
+          3039326534306363380a353231363561656563313430376138386438386539663563626533386366
+          3966
+

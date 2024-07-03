@@ -4,4 +4,5 @@
   hosts: all
 
   roles:
-    - ha_nginx_keepalived
+    - nginx_deploy
+    - keepalived_deploy

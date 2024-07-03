@@ -1,0 +1,4 @@
+---
+# defaults file for nginx_deploy
+
+nginx_deploy_ver: 1.20.1-10.el7.x86_64

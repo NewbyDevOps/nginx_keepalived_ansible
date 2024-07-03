@@ -1,0 +1,7 @@
+---
+
+- name: Installation and configuration nginx
+  hosts: all
+
+  roles:
+    - nginx_deploy

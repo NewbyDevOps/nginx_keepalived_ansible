@@ -1,0 +1,20 @@
+---
+# handlers file for keepalived_deploy
+
+- name: Start and enable keepalived service
+  become: yes
+  service:
+    name: keepalived
+    state: started
+    enabled: yes
+    
+- name: Apply settings for sysctl
+  become: yes
+  shell:
+    cmd: sysctl --system
+
+- name: Reload keepalived service
+  become: yes
+  service:
+    name: keepalived
+    state: reloaded

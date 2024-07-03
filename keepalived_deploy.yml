@@ -1,0 +1,7 @@
+---
+
+- name: Installation and configuration keepalived
+  hosts: all
+
+  roles:
+    - keepalived_deploy

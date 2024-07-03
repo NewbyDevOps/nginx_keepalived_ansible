@@ -1,0 +1,51 @@
+---
+# tasks file for nginx_deploy
+
+# Install nginx
+
+- name: Install EPEL repo
+  yum:
+    name: epel-release
+
+- name: Fix repos
+  shell: |
+    sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* &&
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+
+- name: Install nginx
+  become: yes
+  yum:
+    name: "nginx-{{ nginx_ver }}"
+    update_cache: yes
+  notify:
+    - Start and enable nginx service
+    
+# Configuring nginx
+
+- name: Write new index.html page for test
+  template:
+    src: index.j2
+    dest: /usr/share/doc/HTML/index.html
+    mode: 0555
+  notify:
+    - Reload nginx service
+    
+# Configuring firewalld for nginx
+
+- name: Enable http service
+  become: yes
+  firewalld:
+    service: http
+    zone: public
+    permanent: true
+    state: enabled
+    immediate: yes
+
+- name: Enable https service
+  become: yes
+  firewalld:
+    service: https
+    zone: public
+    permanent: true
+    state: enabled
+    immediate: yes
