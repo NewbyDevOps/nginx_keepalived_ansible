@@ -1,0 +1,6 @@
+[newrepo]
+name=New CentOS Repository after 01.07.2024 
+baseurl=http://vault.centos.org/7.9.2009/os/x86_64/
+gpgcheck=0
+enabled=1
+   
