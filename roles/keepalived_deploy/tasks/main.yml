@@ -34,7 +34,7 @@
   become: yes
   firewalld:
     zone: public
-    rich_rule: 'rule family="ipv4" destination address="224.0.0.18" protocol value="ip" accept'
+    rich_rule: 'rule family="ipv4" destination address="{{ keepalived_broadcast_ip }}" protocol value="ip" accept'
     permanent: true
     state: enabled
     immediate: yes
