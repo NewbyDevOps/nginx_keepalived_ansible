@@ -7,6 +7,16 @@
   yum:
     name: epel-release
 
+#- name: Add new repo after 01.07.2024
+#  copy:
+#    src: CentOS-New.repo
+#    dest: /etc/yum.repos.d/
+
+#- name: Update repo cache
+#  become: yes
+#  yum:
+#    update_cache: yes
+
 - name: Fix repos
   shell: |
     sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* &&
