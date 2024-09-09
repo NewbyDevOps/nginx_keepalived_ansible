@@ -7,15 +7,15 @@ keepalived_ver: 1.3.5-19.el7.x86_64
 
 keepalived_script: '"pidof nginx"'
 keepalived_interval: 2     
-keepalived_weight: 3
+keepalived_weight: 2
 
-keepalived_state: "{{ (ansible_enp0s8.ipv4.address.split('.')[-1] == '2') | ternary('MASTER', 'BACKUP') }}"
+keepalived_state: "{{ (ansible_facts[keepalived_interface]['ipv4']['address'].split('.')[-1] == '2') | ternary('MASTER', 'BACKUP') }}"
 keepalived_interface: "enp0s8"
 keepalived_router_id: 151
-keepalived_priority: "{{ 252 -  ansible_enp0s8.ipv4.address.split('.')[-1] | int }}"
+keepalived_priority: "{{ 254 - ansible_facts[keepalived_interface]['ipv4']['address'].split('.')[-1] | int }}"
 
 keepalived_vip: 192.168.10.50/24
-keepalived_broadcast_ip: 224.0.0.18
+keepalived_broadcast_ip: '"224.0.0.18"'
 
 keepalived_track_script: "check_nginx"
 
