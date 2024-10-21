@@ -5,7 +5,7 @@ global_defs {
 
 # Script to check whether Nginx is running or not
 vrrp_script check_nginx {
-  script {{ keepalived_script }}
+  script "{{ keepalived_script }}"
   interval {{ keepalived_interval }}
   weight {{ keepalived_weight }}
 }
