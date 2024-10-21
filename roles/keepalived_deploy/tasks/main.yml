@@ -30,7 +30,7 @@
     state: enabled
     immediate: yes
 
-- name: Enable traffic to the broadcast address 224.0.0.18
+- name: Enable traffic to the broadcast ip address
   become: yes
   firewalld:
     zone: public
